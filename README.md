@@ -31,7 +31,7 @@ Usage:
 
 Example run using a Netgear GS748TP firmware file:
 
-    $ ros_unpack --verbose GS7xxTP-V5.2.0.11.ros
+    $ ros_unpack --verbose --extract GS7xxTP-V5.2.0.11.ros
 
     ROS PACK firmware archive payload extractor
     Version 0.5
@@ -55,6 +55,7 @@ Example run using a Netgear GS748TP firmware file:
     Length:              0xa2 (162)
     Payload Offset:      0xf0 (240)
     Next Offset:         0x192
+    Extracted DATETIME_C from offset 240 (162 bytes)
 
     Entry:               1
     Filename:            RSCODE
@@ -67,6 +68,7 @@ Example run using a Netgear GS748TP firmware file:
       Link Time:           11:01:27
       Link Date:           2014-05-04 (Swapping big-endian year value, unlikely to be 56839)
     Data type:           LZMA compressed
+    Extracted RSCODE from offset 434 (2885192 bytes)
 
     Entry:               2
     Filename:            CLI_FILE
@@ -79,6 +81,7 @@ Example run using a Netgear GS748TP firmware file:
       Link Time:           11:01:56
       Link Date:           2014-05-04 (Swapping big-endian year value, unlikely to be 56839)
     Data type:           LZMA compressed
+    Extracted CLI_FILE from offset 2885658 (4756 bytes)
 
     Entry:               3
     Filename:            DELSCRF
@@ -91,6 +94,7 @@ Example run using a Netgear GS748TP firmware file:
       Link Time:           11:01:56
       Link Date:           2014-05-04 (Swapping big-endian year value, unlikely to be 56839)
     Data type:           LZMA compressed
+    Extracted DELSCRF from offset 2890446 (294456 bytes)
 
     Entry:               4
     Filename:            EWS_FILE
@@ -98,6 +102,7 @@ Example run using a Netgear GS748TP firmware file:
     Payload Offset:      0x309906 (3184902)
     Next Offset:         0x3a849f
     Data type:           7z archive
+    Extracted EWS_FILE from offset 3184902 (650137 bytes)
 
     Entry:               5
     Filename:            UPNP_FILE
@@ -110,6 +115,7 @@ Example run using a Netgear GS748TP firmware file:
       Link Time:           11:01:59
       Link Date:           2014-05-04 (Swapping big-endian year value, unlikely to be 56839)
     Data type:           LZMA compressed
+    Extracted UPNP_FILE from offset 3835071 (15730 bytes)
 
     Payload length:      3850753
     Payload extracted:   3850753
