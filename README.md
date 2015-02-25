@@ -1,7 +1,7 @@
 # ROS PACK Firmware Archive Payload Manipulator
 
   * ros_unpack
-  * ros_pack
+  * ros_pack (coming soon)
 
 These tools will examine and optionally extract or build the payload of ROS firmware update files
 commonly used on switches, routers, and other devices which use VxWorks Realtime Operating System.
@@ -50,78 +50,66 @@ Example run using a Netgear GS748TP firmware file:
     Signature:        PACK
     Dir Entries:      6
 
-    Entry:          0
-    Filename:       DATETIME_C
-    Length:         0xa2 (162)
-    Payload Offset: 0xf0 (240)
-    Next Offset:    0x192
+    Entry:               0
+    Filename:            DATETIME_C
+    Length:              0xa2 (162)
+    Payload Offset:      0xf0 (240)
+    Next Offset:         0x192
 
-    Entry:          1
-    Filename:       RSCODE
-    Length:         0x2c0668 (2885224)
-    Payload Offset: 0x192 (402)
-    Next Offset:    0x2c07fa
-
-    Entry:          2
-    Filename:       CLI_FILE
-    Length:         0x12b4 (4788)
-    Payload Offset: 0x2c07fa (2885626)
-    Next Offset:    0x2c1aae
-
-    Entry:          3
-    Filename:       DELSCRF
-    Length:         0x47e58 (294488)
-    Payload Offset: 0x2c1aae (2890414)
-    Next Offset:    0x309906
-
-    Entry:          4
-    Filename:       EWS_FILE
-    Length:         0x9eb99 (650137)
-    Payload Offset: 0x309906 (3184902)
-    Next Offset:    0x3a849f
-
-    Entry:          5
-    Filename:       UPNP_FILE
-    Length:         0x3d92 (15762)
-    Payload Offset: 0x3a849f (3835039)
-    Next Offset:    0x3ac231
-
-    Examining DATETIME_C
-
-    Examining RSCODE
+    Entry:               1
+    Filename:            RSCODE
+    Length:              0x2c0668 (2885224)
+    Payload Offset:      0x192 (402)
+    Next Offset:         0x2c07fa
       Sub-header found
       Magic Index:         2.00
       Uncompressed length: 11458320
       Link Time:           11:01:27
       Link Date:           2014-05-04 (Swapping big-endian year value, unlikely to be 56839)
-      Data type:          LZMA compressed
+    Data type:           LZMA compressed
 
-    Examining CLI_FILE
+    Entry:               2
+    Filename:            CLI_FILE
+    Length:              0x12b4 (4788)
+    Payload Offset:      0x2c07fa (2885626)
+    Next Offset:         0x2c1aae
       Sub-header found
       Magic Index:         2.00
       Uncompressed length: 14752
       Link Time:           11:01:56
       Link Date:           2014-05-04 (Swapping big-endian year value, unlikely to be 56839)
-      Data type:          LZMA compressed
+    Data type:           LZMA compressed
 
-    Examining DELSCRF
+    Entry:               3
+    Filename:            DELSCRF
+    Length:              0x47e58 (294488)
+    Payload Offset:      0x2c1aae (2890414)
+    Next Offset:         0x309906
       Sub-header found
       Magic Index:         2.00
       Uncompressed length: 1263279
       Link Time:           11:01:56
       Link Date:           2014-05-04 (Swapping big-endian year value, unlikely to be 56839)
-      Data type:          LZMA compressed
+    Data type:           LZMA compressed
 
-    Examining EWS_FILE
-      Data type:          7z archive
+    Entry:               4
+    Filename:            EWS_FILE
+    Length:              0x9eb99 (650137)
+    Payload Offset:      0x309906 (3184902)
+    Next Offset:         0x3a849f
+    Data type:           7z archive
 
-    Examining UPNP_FILE
+    Entry:               5
+    Filename:            UPNP_FILE
+    Length:              0x3d92 (15762)
+    Payload Offset:      0x3a849f (3835039)
+    Next Offset:         0x3ac231
       Sub-header found
       Magic Index:         2.00
       Uncompressed length: 55672
       Link Time:           11:01:59
       Link Date:           2014-05-04 (Swapping big-endian year value, unlikely to be 56839)
-      Data type:          LZMA compressed
+    Data type:           LZMA compressed
 
     Payload length:      3850753
     Payload extracted:   3850753

@@ -30,74 +30,11 @@
 #include <string>
 #include <string.h>
 #include <sstream>
+#include "ros_pack.hpp"
 
 using namespace std;
 
-struct _version {
-  unsigned major;
-  unsigned minor;
-};
-
 const struct _version version = { 0, 5};
-
-/* The following structures map directly onto the stored file data.
- * All fields are the same size in memory as in storage.
- */
-
-/* Primary header of the entire ROS ARChive PACK file */
-struct ros_header { // 32 bytes
-  char arc_magic[4];
-  char arc_index[4];
-  unsigned char link_second;
-  unsigned char link_minute;
-  unsigned char link_hour;
-  unsigned char unknown0;
-  unsigned char link_day;
-  unsigned char link_month;
-  unsigned short link_year;
-  unsigned int payload_length; // offset 16
-  unsigned int payload_checksum;
-  char signature[4];
-  unsigned int unknown1;
-  unsigned int dir_entries_qty; // offset 32
-  unsigned int extended_header_length;
-  unsigned int unknown3;
-  unsigned int unknown4;
-};
-
-/* Directory Entries for payload files */
-struct ros_dirent { // 32 bytes
-  char filename[16];
-  unsigned int offset; // offset 16
-  unsigned int length;
-  unsigned int unknown1;
-  unsigned int unknown2;
-};
-
-/* Sub-header at start of payload file data
- * identified by its link_arc magic signature prefix */
-struct ros_arc_header {
-  char arc_magic[4];
-  char arc_index[4];
-  unsigned char link_second;
-  unsigned char link_minute;
-  unsigned char link_hour;
-  unsigned char unknown0;
-  unsigned char link_day;
-  unsigned char link_month;
-  unsigned short link_year;
-  unsigned int unknown1; // offset 16
-  unsigned int uncompressed_length;
-  unsigned int unknown2;
-  unsigned int unknown3;
-};
-
-/* Simple structure to specify commonly found payload data types */
-struct data_sig {
-  char magic[16];
-  unsigned int  magic_length;
-  const char *title;
-};
 
 struct data_sig data_sigs[] = {
   { { '7', 'z', (char)0xBC, (char)0xAF, (char)0x27, (char)0x1C}, 6, "7z archive"},
@@ -109,10 +46,12 @@ const unsigned int buffer_size = 1024*1024; // payload data read/write buffer si
 // command-line switches
 const char *switch_verbose = "--verbose";
 const char *switch_extract = "--extract";
+const char *switch_uncompress = "--uncompress";
 const char *switch_help = "--help";
 
 bool verbose = false;
 bool extract = false;
+bool uncompress = false;
 
 unsigned int payload_checksum = 0;
 
@@ -131,10 +70,12 @@ usage(char *prog_name)
   cout << "Usage: " << prog_name << " ["
        << " " << switch_verbose
        << " " << switch_extract
+       << " " << switch_uncompress
        << " " << switch_help
        <<  " ] FILENAME" << endl
        << switch_verbose << ": be verbose about progress" << endl
        << switch_extract << ": extract archive contents to current directory" << endl
+       << switch_uncompress << ": uncompress payload data files to current directory" << endl
        << switch_help    << ": display this help text" << endl
        << "FILENAME: the ROS PACK archive file to process" << endl;
 }
@@ -168,6 +109,11 @@ main(int argc, char **argv, char **env)
     }
     else if (strncmp(argv[i], switch_extract, 3) == 0) {
       extract = true;
+    }
+    else if(strncmp(argv[i], switch_uncompress, 3) == 0) {
+      uncompress = true;
+      if (!extract) // uncompress infers extract
+        extract = true;
     }
     else {
       target_file = argv[i];
@@ -223,12 +169,6 @@ main(int argc, char **argv, char **env)
     for (unsigned i = 0; i < header.dir_entries_qty; ++i) {
       target.read(reinterpret_cast<char *>(&dirents[i]), sizeof(struct ros_dirent));
       checksum_calc(reinterpret_cast<const char *>(&dirents[i]), sizeof(struct ros_dirent));
-      if (verbose) cout << endl 
-           << "Entry:          " << i << endl
-           << "Filename:       " << dirents[i].filename << endl
-           << "Length:         " << showbase << hex << dirents[i].length << " (" << dec << dirents[i].length << ")" << endl
-           << "Payload Offset: " << showbase << hex << dirents[i].offset << " (" << dec << dirents[i].offset << ")" << endl
-           << "Next Offset:    " << showbase << hex << dirents[i].offset + dirents[i].length << dec << endl;
     }
 
     // now read and interpret the payload contents
@@ -258,8 +198,12 @@ main(int argc, char **argv, char **env)
         if (remaining == dirents[i].length) { // first chunk - may need to disgard a header
           struct ros_arc_header *arc_header = reinterpret_cast<ros_arc_header *>(buffer);
 
-          if (verbose) 
-            cout << endl << "Examining " << dirents[i].filename << endl;
+          if (verbose) cout << endl 
+               << "Entry:               " << i << endl
+               << "Filename:            " << dirents[i].filename << endl
+               << "Length:              " << showbase << hex << dirents[i].length << " (" << dec << dirents[i].length << ")" << endl
+               << "Payload Offset:      " << showbase << hex << dirents[i].offset << " (" << dec << dirents[i].offset << ")" << endl
+               << "Next Offset:         " << showbase << hex << dirents[i].offset + dirents[i].length << dec << endl;
 
           // examine the ARC sub-header
           if (strncmp(arc_header->arc_magic, header.arc_magic, sizeof(((ros_header*)0)->arc_magic)) == 0) {
@@ -273,9 +217,9 @@ main(int argc, char **argv, char **env)
 
             if (verbose)
               cout << "  Sub-header found" << endl
-                 << "  Magic Index:         " << arc_sub_index << endl
-                 << "  Uncompressed length: " << arc_header->uncompressed_length << endl
-                 << "  Link Time:           " << setw(2) << static_cast<int>(arc_header->link_hour) << ":" << setw(2) << static_cast<int>(arc_header->link_minute) << ":" << setw(2) << static_cast<int>(arc_header->link_second) << endl; 
+                   << "  Magic Index:         " << arc_sub_index << endl
+                   << "  Uncompressed length: " << arc_header->uncompressed_length << endl
+                   << "  Link Time:           " << setw(2) << static_cast<int>(arc_header->link_hour) << ":" << setw(2) << static_cast<int>(arc_header->link_minute) << ":" << setw(2) << static_cast<int>(arc_header->link_second) << endl; 
               int link_year = static_cast<int>(arc_header->link_year);
               stringstream ss;
               if (link_year > 2100) { // probably need to swap byte order
@@ -283,7 +227,8 @@ main(int argc, char **argv, char **env)
                 link_year = ((link_year & 0xFF) << 8) | ((link_year & 0xFF00) >> 8);
               }
 
-              cout << "  Link Date:           " << setw(4) << link_year << "-" << setw(2) << static_cast<int>(arc_header->link_month) << "-" << setw(2) << static_cast<int>(arc_header->link_day) << (verbose && ss.str().length() ? ss.str() : "") << endl;
+              if (verbose)
+                cout << "  Link Date:           " << setw(4) << link_year << "-" << setw(2) << static_cast<int>(arc_header->link_month) << "-" << setw(2) << static_cast<int>(arc_header->link_day) << (verbose && ss.str().length() ? ss.str() : "") << endl;
 
           }
           
@@ -291,7 +236,7 @@ main(int argc, char **argv, char **env)
           for (unsigned j = 0; j < sizeof(data_sigs); ++j) {
             if (strncmp(buffer + real_offset, data_sigs[j].magic, sizeof(data_sigs[j].magic)) == 0) {
               if (verbose)
-                cout << "  Data type:           " << data_sigs[j].title << endl;
+                cout << "Data type:           " << data_sigs[j].title << endl;
               break;
             }
           }
@@ -305,7 +250,7 @@ main(int argc, char **argv, char **env)
       }
       if (extract) {
         payload.close();
-        cout << "Written " << dirents[i].filename << " from offset " << dirents[i].offset;
+        cout << "Extracted " << dirents[i].filename << " from offset " << dirents[i].offset;
         cout << " (" << dec << dirents[i].length << " bytes)" << endl;
       }
 
