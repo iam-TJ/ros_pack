@@ -93,8 +93,7 @@ Example run using a Netgear GS748TP firmware file:
       Magic Index:         2.00
       Uncompressed length: 11458320
       Link Time:           11:01:27
-    Swapping big-endian year value, unlikely to be 56839
-      Link Date:           2014-05-04
+      Link Date:           2014-05-04 (Swapping big-endian year value, unlikely to be 56839)
       Data type:          LZMA compressed
 
     Examining CLI_FILE
@@ -102,8 +101,7 @@ Example run using a Netgear GS748TP firmware file:
       Magic Index:         2.00
       Uncompressed length: 14752
       Link Time:           11:01:56
-    Swapping big-endian year value, unlikely to be 56839
-      Link Date:           2014-05-04
+      Link Date:           2014-05-04 (Swapping big-endian year value, unlikely to be 56839)
       Data type:          LZMA compressed
 
     Examining DELSCRF
@@ -111,8 +109,7 @@ Example run using a Netgear GS748TP firmware file:
       Magic Index:         2.00
       Uncompressed length: 1263279
       Link Time:           11:01:56
-    Swapping big-endian year value, unlikely to be 56839
-      Link Date:           2014-05-04
+      Link Date:           2014-05-04 (Swapping big-endian year value, unlikely to be 56839)
       Data type:          LZMA compressed
 
     Examining EWS_FILE
@@ -123,8 +120,7 @@ Example run using a Netgear GS748TP firmware file:
       Magic Index:         2.00
       Uncompressed length: 55672
       Link Time:           11:01:59
-    Swapping big-endian year value, unlikely to be 56839
-      Link Date:           2014-05-04
+      Link Date:           2014-05-04 (Swapping big-endian year value, unlikely to be 56839)
       Data type:          LZMA compressed
 
     Payload length:      3850753
