@@ -16,7 +16,41 @@ These tools will not process the associated .rfb (firmware boot-loader) files.
 The payload can contain many individual payload data files. Each data file may be stored
 as-is or compressed, and may be another form of archive container (7z, zip, etc.).
 
-Usage:
+---
+
+## Roadmap
+
+An overview of what functionality exists and is planned. Help welcome in all areas, especially binary
+packaging. Programming is C++ 11 with C style and library interface fall-backs.
+
+  ✔ understand data structures
+  ✔ list payload files
+  ✔ extract payload files
+  ✔ reproduce checksum algorithm
+  * collect wide range of example ROS files covering many devices (see known_devices.csv)
+  * add unit test suite to ensure continued accuracy
+  * uncompress payload file data (LZMA)
+  * uncompress and unpack payload archives (7z, zip)
+  * create 100% identical compressed payload entry
+  * create 100% identical compressed archive entry (7z, zip)
+  * add ros_pack archive builder tool
+  * add support for i18n and L10n (language and locale)
+  * add documentation (HTML)
+  * refactor build tooling to use autoconf/automake and friends
+  * binary package for Debian/Ubuntu and other compatible Linux distros
+  * binary package for RPM and other Redhat/Centos compatible Linux distros (help needed)
+  * binary package for OSX (help needed)
+  * code refactoring to support Microsoft Windows (help needed)
+  * binary installer package for Microsoft Windows (help needed)
+  * GUI (cross-platform if possible - maybe simple embedded HTTP server) (help needed)
+
+## Changelog
+
+2015-02-26 v0.5 is 100% checksum-accurate, paving way for building ROS PACK archives
+2015-02-25 v0.4 able to extract bit-accurate payloads
+2015-02-22 v0.1 able to read most of PACK header and Directory entries
+
+## Usage
 
     $ ros_unpack --help
     ROS PACK firmware archive payload extractor
