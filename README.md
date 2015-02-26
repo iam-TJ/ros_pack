@@ -1,7 +1,3 @@
-% 
-% TJ <hacker@iam.tj>
-% 2015-02-26
-
 # ROS PACK Firmware Archive Toolkit
 
   * ros_unpack
