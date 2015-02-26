@@ -1,0 +1,30 @@
+Manufacturer,Model,Alternate Model,Test-File,Verified
+Netgear,GS724T,,,
+Netgear,GS748T,,,
+Netgear,GS724TP,,GS7xxTP-V5.2.0.11.ros,true
+Netgear,GS748TP,,GS7xxTP-V5.2.0.11.ros,true
+HP,HP1905-24,JD990A,
+HP,HP1905-48,JD994A,
+HP,HP1905-24-PoE,JD992A,
+3Com,Baseline Plus 2426 PWR,3CBLSF26PWRH,
+TPLink,TL-SG3109,,,
+TPLink,TL-SL3452,,,
+TPLink,TL-R402m,,,
+Dell,PowerConnect 28xx,,,
+Dell,PowerConnect 5324,,,
+Dell,PowerConnect 5548,,,
+D-Link,DL-604LB+,,,
+EnGenius,ESW-8228,,,
+PLANET,WGSW-24020,,,
+DLink,DGS-3100,,DGS-3100_series_FW_3.60.28.ros,true
+Cisco,SF200-24P,,,
+Cisco,SG200-18,,,
+Cisco,SG200-26,,,
+Cisco,SG500-52P,,,
+Cisco,SG300-28P,,,
+Cisco,SG300-52,,,
+Cisco,SGE2000,,,
+Cisco,SFE2010,,,
+Linksys,SRW2016,,,
+Linksys,SRW2024,,,
+
