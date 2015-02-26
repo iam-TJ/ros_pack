@@ -1,4 +1,8 @@
-# ROS PACK Firmware Archive Payload Manipulator
+% 
+% TJ <hacker@iam.tj>
+% 2015-02-26
+
+# ROS PACK Firmware Archive Toolkit
 
   * ros_unpack
   * ros_pack (coming soon)
@@ -23,10 +27,10 @@ as-is or compressed, and may be another form of archive container (7z, zip, etc.
 An overview of what functionality exists and is planned. Help welcome in all areas, especially binary
 packaging. Programming is C++ 11 with C style and library interface fall-backs.
 
-  ✔ understand data structures
-  ✔ list payload files
-  ✔ extract payload files
-  ✔ reproduce checksum algorithm
+  * understand data structures ✔
+  * list payload files ✔
+  * extract payload files ✔
+  * reproduce checksum algorithm ✔
   * collect wide range of example ROS files covering many devices (see known_devices.csv)
   * add unit test suite to ensure continued accuracy
   * uncompress payload file data (LZMA)
@@ -46,9 +50,11 @@ packaging. Programming is C++ 11 with C style and library interface fall-backs.
 
 ## Changelog
 
+```
 2015-02-26 v0.5 is 100% checksum-accurate, paving way for building ROS PACK archives
 2015-02-25 v0.4 able to extract bit-accurate payloads
 2015-02-22 v0.1 able to read most of PACK header and Directory entries
+```
 
 ## Usage
 
