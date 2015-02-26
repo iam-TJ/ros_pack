@@ -4,7 +4,9 @@
   * ros_pack (coming soon)
 
 These tools will examine and optionally extract or build the payload of ROS firmware update files
-commonly used on switches, routers, and other devices which use VxWorks Realtime Operating System.
+commonly used on switches, routers, and other devices which use Marvell chipsets and
+Marvell Software Solutions Israel (formerly RADLAN) OpENS (Open and portable Embedded
+Networking System), and in particualar its Op-ROS (Router Operating System) on VxWorks RTOS.
 
 Many equipment manufacturers provide firmware updates of the operating system in the form of
 .ros files. These files are identified by the string "PACK" at offset 0x18 (24).
