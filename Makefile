@@ -1,5 +1,6 @@
 CXXFLAGS=-std=c++11 -Wall -g
 LIBS=-llzma
+TITLE=ROS PACK Firmware Archive Toolkit
 
 # C++ LZMA library stream wrapper from Jim Brooks
 # http://www.jimbrooks.org/programming/tools/cpp_stream_lzma_xz_compression.php
@@ -26,6 +27,11 @@ ros_unpack: ros_unpack.cpp stream_input
 
 ros_pack: ros_pack.cpp stream_output
 	$(CXX) $(CXXFLAGS) -o $@ $< $(OBJS) $(LIBS)
+
+README.html: README.md
+	pandoc --standalone --toc --title-prefix="$(TITLE)" --from markdown --to html5 -o $@ $<
+
+html: README.html
 
 clean:
 	$(MAKE) -C $(LZMA_S) clean
