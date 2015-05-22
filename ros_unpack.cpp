@@ -191,7 +191,8 @@ main(int argc, char **argv, char **env)
          << "File length:       " << target_length <<  " (" << showbase << hex << target_length << dec << ")" << endl
          << "ARC Magic:         " << arc_magic << endl
          << "ARC Index:         " << arc_index << endl
-         << "Header     length: " << (ros_header_version >= 2 ? sizeof(struct ros_header_v2) : sizeof(struct ros_header_v1)) << endl;
+         << "Header    version: " << ros_header_version << endl
+         << "           length: " << (ros_header_version >= 2 ? sizeof(struct ros_header_v2) : sizeof(struct ros_header_v1)) << endl;
     if ( ros_header_version > 1) {
       cout
          << "         checksum: " << header.v2.header_checksum.checksum << " (" << showbase << hex << header.v2.header_checksum.checksum << ")" << endl;
@@ -201,15 +202,15 @@ main(int argc, char **argv, char **env)
          << "       calculated: " << checksum_header << " (" << showbase << hex << checksum_header << ")" << endl;
     }
     cout << "Payload" << (ros_header_version > 1 ? " (outer)" : "") << endl
-         << " Payload length:   " << dec << header.v1.payload_checksum_v1.length << " (" << showbase << hex << header.v1.payload_checksum_v1.length << ")" << endl
-         << " Payload Checksum: " << dec << header.v1.payload_checksum_v1.checksum << " (" << showbase << hex << header.v1.payload_checksum_v1.checksum << ")" << endl;
+         << "           length: " << dec << header.v1.payload_checksum_v1.length << " (" << showbase << hex << header.v1.payload_checksum_v1.length << ")" << endl
+         << "         checksum: " << dec << header.v1.payload_checksum_v1.checksum << " (" << showbase << hex << header.v1.payload_checksum_v1.checksum << ")" << endl;
     switch (ros_header_version) {
       case 2:
         cout
          << "Payload (inner)" << endl
-         << " Payload length:   " << dec << header.v2.payload_checksum_v2.length << " (" << showbase << hex << header.v2.payload_checksum_v2.length << dec << ")" << endl
-         << " Payload Checksum: " << dec << header.v2.payload_checksum_v2.checksum << " (" << showbase << hex << header.v2.payload_checksum_v2.checksum << ")" << endl
-         << " Firmware version: " << header.v2.firmware_version << endl;
+         << "           length: " << dec << header.v2.payload_checksum_v2.length << " (" << showbase << hex << header.v2.payload_checksum_v2.length << dec << ")" << endl
+         << "         checksum: " << dec << header.v2.payload_checksum_v2.checksum << " (" << showbase << hex << header.v2.payload_checksum_v2.checksum << ")" << endl
+         << "Firmware version:  " << header.v2.firmware_version << endl;
         break;
     }
     cout.fill('0');
@@ -313,10 +314,10 @@ main(int argc, char **argv, char **env)
     }
     delete[] buffer;
     cout << endl
-         << "Payload length:      " << dec << payload_hdr_checksum.length << " (" << showbase << hex << payload_hdr_checksum.length << ")" << endl
-         << "Payload extracted:   " << dec << total_extracted << " (" << showbase << hex << total_extracted << ")" << endl
-         << "Payload Checksum:    " << dec << payload_hdr_checksum.checksum << " (" << showbase << hex << payload_hdr_checksum.checksum << ")" << endl
-         << "Calculated Checksum: " << dec << payload_checksum << " (" << showbase << hex << payload_checksum << ")" << endl
+         << "Payload      length: " << dec << payload_hdr_checksum.length << " (" << showbase << hex << payload_hdr_checksum.length << ")" << endl
+         << "Payload   extracted: " << dec << total_extracted << " (" << showbase << hex << total_extracted << ")" << endl
+         << "Payload    checksum: " << dec << payload_hdr_checksum.checksum << " (" << showbase << hex << payload_hdr_checksum.checksum << ")" << endl
+         << "Calculated checksum: " << dec << payload_checksum << " (" << showbase << hex << payload_checksum << ")" << endl
          << endl;
     target.close();
 
