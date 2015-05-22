@@ -6,10 +6,12 @@
 These tools will examine and optionally extract or build the payload of ROS firmware update files
 commonly used on switches, routers, and other devices which use Marvell chipsets and
 Marvell Software Solutions Israel (formerly RADLAN) OpENS (Open and portable Embedded
-Networking System), and in particualar its Op-ROS (Router Operating System) on VxWorks RTOS.
+Networking System), and in particular its Op-ROS (Router Operating System) on VxWorks RTOS.
 
 Many equipment manufacturers provide firmware updates of the operating system in the form of
 .ros files. These files are identified by the string "PACK" at offset 0x18 (24).
+
+The tools understand both version 1.x and 2.x headers.
 
 These tools will not process the associated .rfb (firmware boot-loader) files.
 
@@ -27,7 +29,9 @@ packaging. Programming is C++ 11 with C style and library interface fall-backs.
   * list payload files ✔
   * extract payload files ✔
   * reproduce checksum algorithm ✔
-  * collect wide range of example ROS files covering many devices (see known_devices.csv)
+  * support version 1.x and 2.x headers ✔
+  * collect wide range of example ROS files covering many devices (see known_devices.csv) ✔
+  * refactor into a C-style library and optional CLI front ends
   * add unit test suite to ensure continued accuracy
   * uncompress payload file data (LZMA)
   * uncompress and unpack payload archives (7z, zip)
@@ -47,6 +51,7 @@ packaging. Programming is C++ 11 with C style and library interface fall-backs.
 ## Changelog
 
 ```
+2015-05-22 v0.6 add support for ROS PACK version 2.x headers
 2015-02-26 v0.5 is 100% checksum-accurate, paving way for building ROS PACK archives
 2015-02-25 v0.4 able to extract bit-accurate payloads
 2015-02-22 v0.1 able to read most of PACK header and Directory entries
@@ -69,24 +74,25 @@ packaging. Programming is C++ 11 with C style and library interface fall-backs.
 
 Example run using a Netgear GS748TP firmware file:
 
-    $ ros_unpack --verbose --extract GS7xxTP-V5.2.0.11.ros
+    $ ../ros_unpack --verbose --extract "../test_files/ros/Netgear GS7xxTP-V5.2.0.11.ros"
 
     ROS PACK firmware archive payload extractor
-    Version 0.5
+    Version 0.6
     (c) Copyright 2015 TJ <hacker@iam.tj>
     Licensed on the terms of the GNU General Public License version 2
 
-    Filename:         GS7xxTP-V5.2.0.11.ros
-    File length:      3850801 (0x3ac231)
-    ARC Magic:        NG01
-    ARC Index:        1.01
-    Payload length:   3850753 (0x3ac201)
-    Header length:    48
-    Link Time:        11:01:59
-    Link Date:        2014-05-04
-    Payload Checksum: 0x1d186dc8 (488140232)
-    Signature:        PACK
-    Dir Entries:      6
+    Filename:          ../test_files/ros/Netgear GS7xxTP-V5.2.0.11.ros
+    File length:       3850801 (0x3ac231)
+    ARC Magic:         NG01
+    ARC Index:         1.01
+    Header     length: 48
+    Payload
+     Payload length:   3850753 (0x3ac201)
+     Payload Checksum: 488140232 (0x1d186dc8)
+    Link Time:         11:01:59
+    Link Date:         2014-05-04
+    Signature:         PACK
+    Dir Entries:       6
 
     Entry:               0
     Filename:            DATETIME_C
@@ -155,8 +161,7 @@ Example run using a Netgear GS748TP firmware file:
     Data type:           LZMA compressed
     Extracted UPNP_FILE from offset 3835071 (15730 bytes)
 
-    Payload length:      3850753
-    Payload extracted:   3850753
-    Payload Checksum:    0x1d186dc8
-    Calculated Checksum: 0x1d186dc8
-
+    Payload length:      3850753 (0x3ac201)
+    Payload extracted:   3850753 (0x3ac201)
+    Payload Checksum:    488140232 (0x1d186dc8)
+    Calculated Checksum: 488140232 (0x1d186dc8)
