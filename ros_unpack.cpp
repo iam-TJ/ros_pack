@@ -195,11 +195,11 @@ main(int argc, char **argv, char **env)
          << "           length: " << (ros_header_version >= 2 ? sizeof(struct ros_header_v2) : sizeof(struct ros_header_v1)) << endl;
     if ( ros_header_version > 1) {
       cout
-         << "         checksum: " << header.v2.header_checksum.checksum << " (" << showbase << hex << header.v2.header_checksum.checksum << ")" << endl;
+         << "         checksum: " << dec << header.v2.header_checksum.checksum << " (" << showbase << hex << header.v2.header_checksum.checksum << ")" << endl;
         header.v2.header_checksum.checksum = 0;
         unsigned int checksum_header = 0xFFFFFFFF - checksum_calc(0, reinterpret_cast<const char *>(&header), sizeof(struct ros_header_v2));
         cout
-         << "       calculated: " << checksum_header << " (" << showbase << hex << checksum_header << ")" << endl;
+         << "       calculated: " << dec << checksum_header << " (" << showbase << hex << checksum_header << ")" << endl;
     }
     cout << "Payload" << (ros_header_version > 1 ? " (outer)" : "") << endl
          << "           length: " << dec << header.v1.payload_checksum_v1.length << " (" << showbase << hex << header.v1.payload_checksum_v1.length << ")" << endl
