@@ -1,11 +1,11 @@
 Manufacturer,Model,Alternate Model,Test-File,Verified
 Netgear,GS724T,,,
 Netgear,GS748T,,,
-Netgear,GS7xxYYY,GS748TP,,GS7xxTP-V5.2.0.11.ros,true
-HP,HP1905-24,JD990A,
-HP,HP1905-48,JD994A,
-HP,HP1905-24-PoE,JD992A,
-3Com,Baseline Plus 2426 PWR,3CBLSF26PWRH,
+Netgear,GS7xxYYY,GS748TP,GS7xxTP-V5.2.0.11.ros,true
+HP,HP1905-24,JD990A,,
+HP,HP1905-48,JD994A,,
+HP,HP1905-24-PoE,JD992A,,
+3Com,Baseline Plus 2426 PWR,3CBLSF26PWRH,,
 TPLink,TL-SG3109,,,
 TPLink,TL-SL3452,,,
 TPLink,TL-R402m,,,
@@ -24,5 +24,5 @@ Cisco,Sx500,SG500-52P,Cisco sx500_fw_1.3.7.18.ros,true
 Cisco,Sx500,SG500-52P,Cisco sx500_fw-14088.ros,true
 Cisco,Sx500,SG500-52P,Cisco sx500_fw-1413.ros,true
 Cisco,SGE2x0x,,Cisco SGE20x0x ls1_bp_ge_bx-3020.ros,true
-Linksys,SRW2024,SRW2016,Cisco Linksys SRW20{16,24} ls20xx-12230.ros,true
+Linksys,SRW2024,SRW2016,"Cisco Linksys SRW20{16,24} ls20xx-12230.ros",true
 Linksys,SRW2048,,Cisco Linksys SRW2048_FW_v122d_gesm-12220.ros,true
