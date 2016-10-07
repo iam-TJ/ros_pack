@@ -24,5 +24,5 @@ Cisco,Sx500,SG500-52P,Cisco sx500_fw_1.3.7.18.ros,true
 Cisco,Sx500,SG500-52P,Cisco sx500_fw-14088.ros,true
 Cisco,Sx500,SG500-52P,Cisco sx500_fw-1413.ros,true
 Cisco,SGE2x0x,,Cisco SGE20x0x ls1_bp_ge_bx-3020.ros,true
-Linksys,SRW2024,SRW2016,Cisco Linksys SRW20{16,24} ls20xx-12230.ros,true
+Linksys,SRW2024,SRW2016,"Cisco Linksys SRW20{16,24} ls20xx-12230.ros",true
 Linksys,SRW2048,,Cisco Linksys SRW2048_FW_v122d_gesm-12220.ros,true
